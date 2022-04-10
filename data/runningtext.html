@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>NTPClock | WASISTech</title>
+    <!--
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bxs-watch icon"></i>
+        <div class="logo_name">NTPClock</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="./">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="./wifimanager">
+            <i class="bx bx-wifi"></i>
+            <span class="links_name">WiFi Setup</span>
+          </a>
+          <span class="tooltip">WiFi Setup</span>
+        </li>
+        <li>
+          <a href="./ntp">
+            <i class="bx bxs-watch"></i>
+            <span class="links_name">NTP Setup</span>
+          </a>
+          <span class="tooltip">NTP Setup</span>
+        </li>
+        <li>
+          <a href="./weather">
+            <i class="bx bx-cloud-lightning"></i>
+            <span class="links_name">Weather</span>
+          </a>
+          <span class="tooltip">Weather</span>
+        </li>
+        <li>
+          <a href="./brightness">
+            <i class="bx bx-sun"></i>
+            <span class="links_name">Brightness</span>
+          </a>
+          <span class="tooltip">Brightness</span>
+        </li>
+        <li>
+          <a href="./runningtext">
+            <i class="bx bx-chat"></i>
+            <span class="links_name">Text Messages</span>
+          </a>
+          <span class="tooltip">Text Messages</span>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="container">
+        <h2>Pengaturan Running Text</h2>
+        <form action="/runningtext" method="post">
+          <div class="form-group">
+            <label for="RunningText">RunningText :</label>
+            <input
+              type="text"
+              class="form-control"
+              value=""
+              maxlength="200"
+              name="RunningText"
+              placeholder="Running Text"
+            />
+            <!--<label for="ssid">SSID</label>
+                    <input type="text" id="ssid" name="ssid" /><br />
+                    <label for="pass">Password</label>
+                    <input type="text" id="pass" name="pass" /><br />
+                    <label for="ip">IP Address</label>
+                    <input type="text" id ="ip" name="ip" value="192.168.1.200">-->
+            <!--<input type="submit" value="Submit" />-->
+          </div>
+          <button type="submit" class="btn btn-default">Simpan</button>
+        </form>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

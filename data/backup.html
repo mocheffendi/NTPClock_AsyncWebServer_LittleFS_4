@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NTPClock | WASISTech</title>
+    <link rel=stylesheet href=https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css />
+    <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css />
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js></script>
+    <meta name=viewport content=width=device-width, initial-scale=1.0 />
+    <style src=style.css></style>
+  </head>
+  <body>
+    <div class='sidebar'>
+      <div class='logo-details'>
+        <i class='bx bxs-watch icon'></i>
+        <div class='logo_name'>NTPClock</div>
+        <i class='bx bx-menu' id='btn'></i>
+      </div>
+      <ul class='nav-list'>
+        <li>
+          <a href='./'>
+            <i class='bx bx-grid-alt'></i>
+            <span class='links_name'>Dashboard</span>
+          </a>
+          <span class='tooltip'>Dashboard</span>
+        </li>
+        <li>
+          <a href='./wifi'>
+            <i class='bx bx-wifi'></i>
+            <span class='links_name'>WiFi Setup</span>
+          </a>
+          <span class='tooltip'>WiFi Setup</span>
+        </li>
+        <li>
+          <a href='./ntp'>
+            <i class='bx bxs-watch'></i>
+            <span class='links_name'>NTP Setup</span>
+          </a>
+          <span class='tooltip'>NTP Setup</span>
+        </li>
+        <li>
+          <a href='./weather'>
+            <i class='bx bx-cloud-lightning'></i>
+            <span class='links_name'>Weather</span>
+          </a>
+          <span class='tooltip'>Weather</span>
+        </li>
+        <li>
+          <a href='./brightness'>
+            <i class='bx bx-sun'></i>
+            <span class='links_name'>Brightness</span>
+          </a>
+          <span class='tooltip'>Brightness</span>
+        </li>
+        <li>
+          <a href='./runningtext'>
+            <i class='bx bx-chat'></i>
+            <span class='links_name'>Text Messages</span>
+          </a>
+          <span class='tooltip'>Text Messages</span>
+        </li>
+      </ul>
+    </div>
+    <section class='home-section'>
+      <div class='container'>
+        <h2>Pengaturan NTP Clock</h2>
+        <form action='/' method='POST'> <div class='form-group'>
+            <label for='SSID'>SSID :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(newSSID) + "' maxlength='50' name='SSID' placeholder='ssid'>
+          </div> <div class='form-group'>
+            <label for='PASSWORD'>Password :</label>&nbsp;&nbsp;&nbsp; <input type='password' class='form-control' value='" + String(newPass) + "' maxlength='50' name='PASSWORD' placeholder='password'>
+          </div> <table class='table table-striped'>
+            <thead>
+              <tr>
+                <th>Device</th>
+                <th>Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CHIP ID</td>
+                <td>" + String(ESP.getFlashChipId()) + "</td>
+              </tr>
+              <tr>
+                <td>CHIP Frequency</td>
+                <td>" + String(ESP.getCpuFreqMHz()) + " Hz</td>
+              </tr>
+              <tr>
+                <td>CHIP VCC</td>
+                <td>" + String((ESP.getVcc() / 1000)) + " Volt</td>
+              </tr>
+              <tr>
+                <td>Heap Uses " + String(int(proheapused)) + "%</td>
+                <td>
+                  <div class='progress'>
+                    <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='" + String(proheapused) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + String(proheapused) + "%'> " + String(heapused) + " Bytes</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Free Heap " + String(100 - int(proheapused)) + "%</td>
+                <td>
+                  <div class='progress'>
+                    <div class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='" + String(100 - proheapused) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + String(100 - proheapused) + "%'> " + String(ESP.getFreeHeap()) + " Bytes</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Sketch Uses " + String(int(prosketch)) + "%</td>
+                <td>
+                  <div class='progress'>
+                    <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='" + String(prosketch) + "' aria-valuemin='0' aria-valuemax='100' style='width:" + String(prosketch) + "%'> " + String(ESP.getSketchSize()) + " Bytes</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th>Network</th>
+                <th>Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SSID</td>
+                <td>" + WiFi.SSID() + "</td>
+              </tr>
+              <tr>
+                <td>IP Address</td>
+                <td>" + WiFi.localIP().toString() + "</td>
+              </tr>
+              <tr>
+                <td>Gateway</td>
+                <td>" + WiFi.gatewayIP().toString() + "</td>
+              </tr>
+              <tr>
+                <td>Mask</td>
+                <td>" + WiFi.subnetMask().toString() + "</td>
+              </tr>
+              <tr>
+                <td>DNS</td>
+                <td>" + WiFi.dnsIP().toString() + "</td>
+              </tr>
+              <tr>
+                <td>MAC</td>
+                <td>" + WiFi.macAddress() + "</td>
+              </tr>
+            </tbody>
+          </table> <div class='progress'>
+            <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='"+String(prosketch)+"' aria-valuemin='0' aria-valuemax='100' style='width:"+String(prosketch)+"%'> " + String(ESP.getSketchSize()) + " Bytes</div>
+          </div> <div class='progress'>
+            <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='"+String(proheapused)+"' aria-valuemin='0' aria-valuemax='100' style='width:"+String(proheapused)+"%'> " + String(ESP.getFreeHeap()) + " Bytes</div>
+          </div> <div class='progress'>
+            <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100' style='width:80%'> 20000 Bytes</div>
+          </div> <div class='progress'>
+            <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100' style='width:50%'> 80000 Bytes</div>
+          </div> <div class='form-group'>
+            <label for='DelayNTP'>Delay NTP :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.delayNTP) + "' maxlength='50' name='delayNTP' placeholder='delay NTP'>
+          </div> <div class='form-group'>
+            <label for='DelayTampilTanggal'>Delay Tampil Tanggal :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.delayTampilTanggal) + "' maxlength='50' name='delayTampilTanggal' placeholder='delay Tampil Tanggal'>
+          </div> <div class='form-group'>
+            <label for='DelayWeatherUpdate'>Delay Weather Update :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.delayWeatherUpdate) + "' maxlength='50' name='delayWeatherUpdate' placeholder='delay Weather Update'>
+          </div> <div class='form-group'>
+            <label for='openWeatherMapApiKey'>openWeatherMap API Key :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.openWeatherMapApiKey) + "' maxlength='50' name='openWeatherMapApiKey' placeholder='openWeatherMap API Key'>
+          </div> <div class='form-group'>
+            <label for='City'>City :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.City) + "' maxlength='50' name='City' placeholder='City'>
+          </div> <div class='form-group'>
+            <label for='weatherHostName'>Weather HostName :</label>&nbsp;&nbsp;&nbsp; <input type='text' class='form-control' value='" + String(ClockVar.weatherHostName) + "' maxlength='80' name='weatherHostName' placeholder='weatherHostName'>
+          </div> <div class='form-group'>
+            <label>Suhu :</label>&nbsp;&nbsp;&nbsp; <div class='radio-inline'>
+              <label>
+                <input type='radio' name='isTempDisplayed' " + (ClockVar.isTempDisplayed ? String(" checked") : String("")) + " value='1'>Tampilkan Suhu
+																</label>
+															</div>
+															<div class='radio-inline'>
+																<label>
+																	<input type='radio' name='isTempDisplayed' " + (!ClockVar.isTempDisplayed ? String("checked") : String("")) + " value='0'>Sembunyikan Suhu
+																	</label>
+																</div>
+															</div> <div class='form-group'>
+                <label>Kelembaban :</label>&nbsp;&nbsp;&nbsp; <div class='radio-inline'>
+                  <label>
+                    <input type='radio' name='isHumidityDisplayed' " + (ClockVar.isHumidityDisplayed ? String(" checked") : String("")) + " value='1'>Tampilkan Kelembaban
+																		</label>
+																	</div>
+																	<div class='radio-inline'>
+																		<label>
+																			<input type='radio' name='isHumidityDisplayed' " + (!ClockVar.isHumidityDisplayed ? String("checked") : String("")) + " value='0'>Sembunyikan Kelembaban
+																			</label>
+																		</div>
+																	</div> <div class='form-group'>
+                    <label>Reset Setelah Submit :</label>&nbsp;&nbsp;&nbsp; <div class='radio-inline'>
+                      <label>
+                        <input type='radio' name='isShouldReset' value='1'>Ya </label>
+                    </div>
+                    <div class='radio-inline'>
+                      <label>
+                        <input type='radio' name='isShouldReset' checked value='0'>Tidak </label>
+                    </div>
+                </div> <button type='submit' class='btn btn-default'>Simpan</button>
+        </form>
+        <br>" + msg + " <br>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
